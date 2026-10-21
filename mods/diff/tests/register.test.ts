@@ -22,7 +22,7 @@ describe('register', () => {
     }))
 
     on('fs.list', (_engine, e) => {
-      const isGitDir = e.path === '/work/.git'
+      const isGitDir = e.path.replaceAll('\\', '/').replace(/^[A-Za-z]:/, '') === '/work/.git'
 
       return { value: isGitDir ? listing : [] }
     })
